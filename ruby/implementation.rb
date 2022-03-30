@@ -1,25 +1,21 @@
-class StringCalculator
-  def self.calculate(string_numbers)
-    # Forma Pro en HD
-    string_numbers.split(",").map(&:to_i).sum
+class MarsRover
+  class << self
+    def land(landing_position)
+      @landing_position = landing_position
+    end
 
-    # Forma Pro
-    # - - - - - - - - -
-    # return string_numbers.to_i if string_numbers.length < 2
+    def landing_position
+      @landing_position
+    end
 
-    # string_numbers.split(",").map(&:to_i).sum
+    def move(command)
+      return landing_position if command.empty?
 
-    # Forma Guarra
-    # - - - - - - - - -
-    # if(string_numbers.empty?)
-    #   0
-    # elsif(string_numbers.length==1)
-    #   string_numbers.to_i
-    # end
-    # total=0
-    # string_numbers.split(",").each { |number|
-    #   total += number.to_i
-    # }
-    # total
+      coordinates = landing_position.split(',')
+      command.each_char do |char|
+        coordinates[1] = coordinates[1].to_i + 1 if char == 'M'
+      end
+      coordinates.join(',')
+    end
   end
 end
